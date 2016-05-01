@@ -6,7 +6,7 @@ property :search, String, default: 'name'
 property :destination, String, default: Chef::Config['file_cache_path']
 property :property_hash, Hash, required: false
 property :download_path, identity: true, desired_state: false
-property :checksums, Array default: %w(md5 sha1)
+property :checksums, Array, default: %w(md5 sha1)
 default_action :search
 
 def init

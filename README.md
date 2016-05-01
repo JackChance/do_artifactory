@@ -1,6 +1,8 @@
 # artifactory_do
 Series of resources for using artifactory with Chef
 
+Tested on:
+* Windows 2012r2
 ## resources
 
 ### artifact
