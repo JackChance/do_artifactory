@@ -1,9 +1,10 @@
 property :version, String, name_property: true
-property :source, String, default: nil
+property :source, String, required: false
 default_action :install
 
 action :install do
   chef_gem 'artifactory' do
+    compile_time true
     version new_resource.version
     source new_resource.source unless new_resource.source.nil?
   end
