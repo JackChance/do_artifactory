@@ -5,8 +5,8 @@ default_action :install
 action :install do
   chef_gem 'artifactory' do
     compile_time true
-    version new_resource.version
-    source new_resource.source unless new_resource.source.nil?
+    version new_resource.version unless version == 'latest'
+    source new_resource.source unless source.nil?
   end
 end
 
