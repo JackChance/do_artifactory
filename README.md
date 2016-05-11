@@ -15,7 +15,7 @@ Series of resources for using artifactory with Chef
 |destination|Directory for artifact to be downloaded to|default: Chef::Config['file_cache_path']|String
 |property_hash|Hash of properties to add or replace if they already exist|optional|Hash{String => String}
 |download_path|Location artifact is downloaded to|Identity|String
-|checksums|Valid values for search_type (other than 'name')| Array[String]| default ['md5', 'sha1']
+|checksums|Valid values for search_type (other than 'name')| default ['md5', 'sha1']| Array[String]
 
 #### Actions
 
