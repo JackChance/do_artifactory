@@ -1,10 +1,6 @@
 # do_artifactory
 Series of resources for using artifactory with Chef
 
-Tested on:
-* Windows 2012r2
-* Oel 6.5
-
 ## Resources
 ### artifact
 #### Properties

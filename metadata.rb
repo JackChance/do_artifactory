@@ -5,4 +5,7 @@ source_url 'https://github.com/JackChance/do_artifactory'
 license 'MIT'
 maintainer 'Cameron Straka'
 maintainer_email 'strakacameron@hotmail.com'
-version '0.1.0'
+supports 'windows'
+supports 'oel', '>=6.5'
+
+version '0.1.1'
