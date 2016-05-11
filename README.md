@@ -3,25 +3,30 @@ Series of resources for using artifactory with Chef
 
 Tested on:
 * Windows 2012r2
-## resources
+* Oel 6.5
 
+## Resources
 ### artifact
+#### Properties
 
-Properties
-* endpoint - artifactory server url, name property, String
-* username - artifactory credentials - username, optional, String
-* password - artifactory credentials - password, optional, String
-* search_type - Search type to find artifact. Valid properties are 'name' or any value contained in property checksums, String
-* search - search term to find artifact. Either the name or checksum, as specified by search_type, String
-* destination - Directory for artifact to be downloaded to, defaults to Chef::Config['file_cache_path']
-* property_hash - Hash of properties to add or replace if they already exist, optional, Hash
-* download_path - Location artifact is downloaded to, Identity.
-* checksums - valid values for search_type (other than 'name'), Array[String], default ['md5', 'sha1']
+| Name | Description | Property Modifiers | Type
+| ---- | ----------- | ------------------ | ----
+|endpoint|Artifactory server url|name property|String
+|username|Artifactory credentials, username|optional|String
+|password|Artifactory credentials, password|optional|String
+|search_type|Search type to find artifact. Valid properties are 'name' or any value contained in property checksums|n/a|String
+|search|Search term to find artifact. Either the name or checksum, as specified by search_type|n/a| String
+|destination|Directory for artifact to be downloaded to|default: Chef::Config['file_cache_path']|String
+|property_hash|Hash of properties to add or replace if they already exist|optional|Hash{String => String}
+|download_path|Location artifact is downloaded to|Identity|String
+|checksums|Valid values for search_type (other than 'name')| Array[String]| default ['md5', 'sha1']
 
-Actions
+#### Actions
 
-* :search - find and download artifact by name or checksum, returns location downloaded to, default Actions
-* :update_properties - find artifact by name or checksum and merge the property_hash with the artifact's properties then save on artifactory server. Requires property_hash to not be empty. Only adds or modifies.
+| Name | Description | Default?
+| ---- | ----------- | --------
+|:search|Find and download artifact by name or checksum, returns location downloaded to|Yes
+|:update_properties|Search artifactory then merge the property_hash with the artifact's properties and save on Artifactory server. Requires property_hash to not be empty. Only adds or modifies|No
 
 Usage
 
@@ -51,14 +56,19 @@ end
 ```
 
 ### gem
+#### Properties
 
-Properties
-* version - Version of the gem or 'latest', String, name property
-* source - Source of the gem, String, Optional
+| Name | Description | Property Modifiers | Type
+| ---- | ----------- | ------------------ | ----
+|version|Version of the gem or 'latest'|name property| String
+|source|Source of the gem|Optional|String
 
-Actions
-* :install - Installs the artifactory gem and makes it ready for use immediately at compile time
-* :remove - Uninstalls the artifactory gem
+#### Actions
+
+| Name | Description | Default?
+| ---- | ----------- | --------
+|:install|Installs the artifactory gem and makes it ready for use immediately at compile time|Yes
+|:remove|Uninstalls the artifactory gem|No
 
 Usage
 

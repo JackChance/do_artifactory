@@ -66,7 +66,6 @@ def form_request(property_list, artifact)
   uri.query = URI.encode_www_form(property_list)
   uri.query.prepend('properties=')
   http = Net::HTTP.new(uri.host, uri.port)
-  puts uri.request_uri
   req = Net::HTTP::Put.new(uri.request_uri.tr('&', '|'))
   req['Content-Type'] = 'text/plain'
   req.basic_auth username, password
