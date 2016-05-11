@@ -1,4 +1,4 @@
-# artifactory_do
+# do_artifactory
 Series of resources for using artifactory with Chef
 
 Tested on:
@@ -31,7 +31,7 @@ Tested on:
 Usage
 
 ``` ruby
-artifact_location = artifactory_do_artifact 'http://artifactory.mycompany.com' do
+artifact_location = do_artifactory_artifact 'http://artifactory.mycompany.com' do
   username 'my_user'
   password 'my_password'
   search_type 'sha256'
@@ -44,7 +44,7 @@ puts "artifact exists at #{artifact_location.destination}"
 ```
 
 ```ruby
-artifactory_do_artifact 'http://artifactory.mycompany.com' do
+do_artifactory_artifact 'http://artifactory.mycompany.com' do
   username 'my_user'
   password 'my_password'
   search_type 'sha256'
@@ -73,12 +73,12 @@ end
 Usage
 
 ```ruby
-artifactory_do_gem 'latest' do
+do_artifactory_gem 'latest' do
   source '/my/local/gem/dl'
 end
 ```
 ```ruby
-artifactory_do_gem '2.3.0'do
+do_artifactory_gem '2.3.0'do
   :remove
 end
 ```
