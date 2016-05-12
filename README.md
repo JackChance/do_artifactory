@@ -36,7 +36,7 @@ artifact_location = do_artifactory_artifact 'http://artifactory.mycompany.com' d
   checksums %w(sha256 sha1 md5)
 end
 
-puts "artifact exists at #{artifact_location.destination}"
+puts "artifact exists at #{artifact_location.download_path}"
 ```
 
 ```ruby
@@ -49,32 +49,4 @@ do_artifactory_artifact 'http://artifactory.mycompany.com' do
   checksums %w(sha256 sha1 md5)
   action :update_properties
 end
-```
-
-### gem
-#### Properties
-
-| Name | Description | Property Modifiers | Type
-| ---- | ----------- | ------------------ | ----
-|version|Version of the gem or 'latest'|name property| String
-|source|Source of the gem|Optional|String
-
-#### Actions
-
-| Name | Description | Default?
-| ---- | ----------- | --------
-|:install|Installs the artifactory gem and makes it ready for use immediately at compile time|Yes
-|:remove|Uninstalls the artifactory gem|No
-
-Usage
-
-```ruby
-do_artifactory_gem 'latest' do
-  source '/my/local/gem/dl'
-end
-```
-```ruby
-do_artifactory_gem '2.3.0'do
-  :remove
-end
-```
+``

@@ -5,8 +5,9 @@ property :search_type, String, required: true
 property :search, String, default: 'name'
 property :destination, String, default: Chef::Config['file_cache_path']
 property :property_hash, Hash, required: false
-property :download_path, identity: true, desired_state: false
+property :download_path, String, identity: true, desired_state: false
 property :checksums, Array, default: %w(md5 sha1)
+
 default_action :search
 
 def init
@@ -17,9 +18,9 @@ end
 
 def set_artifactory
   Resource::Artifactory.configure do |config|
-    config.endpoint = new_resource.endpoint
-    config.username = new_resource.username
-    config.password = new_resource.password
+    config.endpoint = endpoint
+    config.username = username
+    config.password = password
   end
 end
 
@@ -47,8 +48,7 @@ def artifact_uri
   uri = nil
   uri = artifactory_checksum_search.download_uri if checksums.include?(search_type)
   uri = artifactory_search.download_uri if search_type == 'name'
-  log "Artifact search at #{endpoint} for #{search_type}: #{search} returned no results" do
-    level :error
+  Chef::Log.error "Artifact search at #{endpoint} for #{search_type}: #{search} returned no results" do
     only_if uri.nil?.to_s
   end
   uri
@@ -84,18 +84,17 @@ action :update_properties do
   artifact = find_artifact
   property_list = update_properties(artifact)
   response = form_request(property_list, artifact)
-  log 'Unable to update access timestamp in artifactory' do
-    message "\n#{response.body}"
-    level :warn
-  end unless response.body.nil?
+  Chef::Log.warn 'Unable to access properties in artifactory' do
+    only_if response.body.nil?
+  end
 end
 
 action :search do
   init
   set_artifactory
   uri = artifact_uri
-  download_path = ::File.join(destination, ::File.basename(uri))
-  directory ::File.dirname(download_path) do
+  new_resource.download_path(::File.join(destination, ::File.basename(uri)))
+  directory destination do
     recursive true
   end
   remote_file download_path do
