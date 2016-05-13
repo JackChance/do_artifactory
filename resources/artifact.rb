@@ -85,7 +85,7 @@ action :update_properties do
   property_list = update_properties(artifact)
   response = form_request(property_list, artifact)
   Chef::Log.warn 'Unable to access properties in artifactory' do
-    only_if response.body.nil?
+    only_if response.body.nil?.to_s
   end
 end
 

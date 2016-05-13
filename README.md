@@ -27,7 +27,7 @@ Series of resources for using artifactory with Chef
 Usage
 
 ``` ruby
-artifact_location = do_artifactory_artifact 'http://artifactory.mycompany.com' do
+artifact = do_artifactory_artifact 'http://artifactory.mycompany.com' do
   username 'my_user'
   password 'my_password'
   search_type 'sha256'
@@ -35,8 +35,9 @@ artifact_location = do_artifactory_artifact 'http://artifactory.mycompany.com' d
   destination '/my_artifacts/this_artifact_type'
   checksums %w(sha256 sha1 md5)
 end
-
-puts "artifact exists at #{artifact_location.download_path}"
+artifact.run_action(:search)
+# #run_action forces the resource to run during the compile step, populating its properties for use during the compile phase.
+puts "artifact exists at #{artifact.download_path}"
 ```
 
 ```ruby
