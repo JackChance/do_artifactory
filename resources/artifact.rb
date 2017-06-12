@@ -30,7 +30,7 @@ def artifactory_checksum_search
 end
 
 def artifactory_search
-  artifact = Resource::Artifact.seach(name: search).first
+  artifact = Resource::Artifact.search(name: search).first
   artifact
 end
 
